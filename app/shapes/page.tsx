@@ -2,7 +2,7 @@
 'use client';
 import { type XCanvas, XShapeNotes } from '@boardxus/canvasx-core';
 import { NextPage } from 'next';
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useState } from 'react';
 import { Canvas } from '../../components/Canvas';
 
 // import { RectNotes } from '../../../../src/shapes/RectNotes';
@@ -101,6 +101,15 @@ const shapeList = [
 
 const IndexPage: NextPage = () => {
   const ref = useRef<XCanvas>(null);
+  const [selected, setSelected] = useState<any>(null);
+  const [property, setProperty] = useState({
+    text: '',
+    backgroundColor: '',
+    width: 200,
+    height: 200,
+    textAlign: 'center',
+    shapeName: '',
+  });
 
   const onLoad = useCallback(
     (canvas: XCanvas) => {
@@ -115,8 +124,8 @@ const IndexPage: NextPage = () => {
         const shapeNote = new XShapeNotes(textValue, {
           originX: 'center',
           originY: 'center',
-          top: (i % 3) * 300,
-          left: (i - (i % 3)) * 200,
+          top: (i % 3) * 200 + 200,
+          left: (i - (i % 3)) * 100 + 200,
           textAlign: 'center',
           width: 200,
           height: 200,
@@ -124,80 +133,98 @@ const IndexPage: NextPage = () => {
           backgroundColor: 'lightblue',
           id: Math.random().toString(36).substr(2, 9),
         });
-
         canvas.add(shapeNote);
       }
-
-      // // Create 10 RectNotes
-      // for (let i = 0; i < 5; i++) {
-      //     const rectNote = new XShapeNotes(textValue, {
-      //         originX: 'center',
-      //         originY: 'center',
-      //         top: 220,
-      //         left: 200 + i * 250,
-      //         textAlign: 'center',
-      //         width: 200,
-      //         height: 200,
-      //         icon: i,
-      //         backgroundColor: 'lightblue',
-      //         id: Math.random().toString(36).substr(2, 9),
-      //     });
-      //     canvas.add(rectNote);
-      // }
-
-      // // Create 10 RectNotes
-      // for (let i = 6; i < 11; i++) {
-      //     const rectNote = new XShapeNotes(textValue, {
-      //         originX: 'center',
-      //         top: 220 + 300,
-      //         left: 200 + (i - 6) * 250,
-      //         textAlign: 'center',
-      //         width: 200,
-      //         height: 200,
-      //         icon: i,
-
-      //         backgroundColor: 'lightblue',
-      //         id: Math.random().toString(36).substr(2, 9),
-      //     });
-      //     canvas.add(rectNote);
-      // }
-
-      // // Create 10 CircleNotes
-      // for (let i = 0; i < 10; i++) {
-      //     const circleNote = new XCircleNotes(textValue, {
-      //         originX: 'center',
-      //         top: 520 + i * 10,
-      //         left: 520 + i * 10,
-      //         textAlign: 'center',
-      //         textValue,
-      //         backgroundColor: 'yellow',
-      //     });
-      //     canvas.add(circleNote);
-      // }
-
-      // // Create 10 more RectNotes with different dimensions
-      // for (let i = 0; i < 10; i++) {
-      //     const rectNote = new XRectNotes(textValue, {
-      //         originX: 'center',
-      //         top: 200 + i * 10,
-      //         left: 600 + i * 10,
-      //         width: 138,
-      //         height: 138,
-      //         textAlign: 'center',
-      //         textValue,
-      //         backgroundColor: 'green',
-      //     });
-      //     canvas.add(rectNote);
-      // }
+      // Selection logic for property editor
+      canvas.on('selection:created', (opt: any) => {
+        if (opt.selected && opt.selected[0]) {
+          setSelected(opt.selected[0]);
+          setProperty({
+            text: opt.selected[0].text,
+            backgroundColor: opt.selected[0].backgroundColor || '',
+            width: opt.selected[0].width,
+            height: opt.selected[0].height,
+            textAlign: opt.selected[0].textAlign,
+            shapeName: opt.selected[0].shapeName || '',
+          });
+        }
+      });
+      canvas.on('selection:updated', (opt: any) => {
+        if (opt.selected && opt.selected[0]) {
+          setSelected(opt.selected[0]);
+          setProperty({
+            text: opt.selected[0].text,
+            backgroundColor: opt.selected[0].backgroundColor || '',
+            width: opt.selected[0].width,
+            height: opt.selected[0].height,
+            textAlign: opt.selected[0].textAlign,
+            shapeName: opt.selected[0].shapeName || '',
+          });
+        }
+      });
+      canvas.on('selection:cleared', () => {
+        setSelected(null);
+      });
     },
     [ref],
   );
 
+  // Property editor
+  const handlePropChange = (e: any) => {
+    if (!selected) return;
+    const { name, value } = e.target;
+    setProperty(prev => ({ ...prev, [name]: value }));
+    if (name === 'width' || name === 'height') {
+      selected.set(name, parseInt(value));
+    } else {
+      selected.set(name, value);
+    }
+    selected.canvas && selected.canvas.requestRenderAll();
+  };
+
   return (
     <div className="position-relative" style={{ minHeight: '80vh' }}>
       {/* Demo Section at the Top */}
-      <div style={{ width: '100%', height: '80vh', margin: '0 auto', border: '1px solid #eee', borderRadius: 12, overflow: 'hidden', background: '#fafbfc' }}>
+      <div style={{ width: '100%', height: '80vh', margin: '0 auto', border: '1px solid #eee', borderRadius: 12, overflow: 'hidden', background: '#fafbfc', position: 'relative' }}>
         <Canvas ref={ref} onLoad={onLoad} />
+        {/* Property Editor Panel */}
+        {selected && (
+          <div style={{ position: 'absolute', right: 24, top: 80, background: '#fff', border: '1px solid #eee', borderRadius: 8, padding: 16, boxShadow: '0 2px 8px #0001', minWidth: 220, zIndex: 10 }}>
+            <h4 style={{ marginTop: 0 }}>Edit Shape Properties</h4>
+            <div style={{ marginBottom: 8 }}>
+              <label>Text: </label>
+              <input name="text" value={property.text} onChange={handlePropChange} style={{ width: '100%' }} />
+            </div>
+            <div style={{ marginBottom: 8 }}>
+              <label>Background: </label>
+              <input name="backgroundColor" value={property.backgroundColor} onChange={handlePropChange} type="color" style={{ width: 40, height: 24, padding: 0, border: 'none' }} />
+            </div>
+            <div style={{ marginBottom: 8 }}>
+              <label>Width: </label>
+              <input name="width" type="number" min={40} max={600} value={property.width} onChange={handlePropChange} style={{ width: 60 }} />
+            </div>
+            <div style={{ marginBottom: 8 }}>
+              <label>Height: </label>
+              <input name="height" type="number" min={40} max={600} value={property.height} onChange={handlePropChange} style={{ width: 60 }} />
+            </div>
+            <div style={{ marginBottom: 8 }}>
+              <label>Align: </label>
+              <select name="textAlign" value={property.textAlign} onChange={handlePropChange}>
+                <option value="left">Left</option>
+                <option value="center">Center</option>
+                <option value="right">Right</option>
+              </select>
+            </div>
+            <div style={{ marginBottom: 8 }}>
+              <label>Shape: </label>
+              <select name="shapeName" value={property.shapeName} onChange={handlePropChange}>
+                {shapeList.map(shape => (
+                  <option key={shape.name} value={shape.name}>{shape.name}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Description Section */}

@@ -1,5 +1,4 @@
 import { XCanvas } from '@boardxus/canvasx-core';
-import { type TPointerEvent } from 'fabric';
 import React, { useEffect, useRef, useState } from 'react';
 
 const DEV_MODE = process.env.NODE_ENV === 'development';
@@ -62,27 +61,48 @@ export const Canvas: any = React.forwardRef<
 
     // Enable zoom in/out for trackpad and mouse wheel
     const handleWheel = (e: WheelEvent) => {
-      if (!e.ctrlKey && !e.metaKey && !e.altKey) {
-        // Only zoom if not panning (no modifier keys)
+      // Only zoom if Ctrl, Meta, or Alt is pressed (for trackpad/mouse zoom)
+      if (e.ctrlKey || e.metaKey || e.altKey) {
         e.preventDefault();
-        // Use only deltaY for modern browsers
         const delta = e.deltaY || e.detail;
         let zoom = canvasInstance.getZoom();
-        // Trackpad is usually small delta, mouse wheel is larger
-        if (e.deltaMode === 1) {
-          // Firefox line mode
-          zoom *= 0.999 ** delta;
-        } else {
-          zoom *= 0.999 ** delta;
-        }
+        zoom *= 0.999 ** delta;
         zoom = Math.max(0.1, Math.min(zoom, 10));
         const pointer = canvasInstance.getPointer(e);
         canvasInstance.zoomToPoint(pointer, zoom);
       }
     };
+
+    // --- Trackpad pinch-to-zoom support for MacBook (gesture events) ---
+    let lastGestureScale = 1;
+    const handleGestureChange = (e: any) => {
+      e.preventDefault();
+      const scaleDelta = e.scale - lastGestureScale;
+      // Simulate a wheel event with ctrlKey: true
+      const fakeWheelEvent = {
+        ctrlKey: true,
+        deltaY: -scaleDelta * 100, // scale to wheel delta
+        preventDefault: () => { },
+        clientX: e.clientX || (canvasRef.current?.width || 0) / 2,
+        clientY: e.clientY || (canvasRef.current?.height || 0) / 2,
+        target: canvasRef.current,
+      };
+      handleWheel(fakeWheelEvent as any);
+      lastGestureScale = e.scale;
+    };
+    const handleGestureStart = (e: any) => {
+      lastGestureScale = e.scale;
+    };
+    const handleGestureEnd = (e: any) => {
+      lastGestureScale = 1;
+    };
+
     const canvasEl = canvasRef.current;
     if (canvasEl) {
       canvasEl.addEventListener('wheel', handleWheel, { passive: false });
+      canvasEl.addEventListener('gesturestart', handleGestureStart, { passive: false });
+      canvasEl.addEventListener('gesturechange', handleGestureChange, { passive: false });
+      canvasEl.addEventListener('gestureend', handleGestureEnd, { passive: false });
     }
 
     // it is crucial `onLoad` is a dependency of this effect
@@ -109,6 +129,9 @@ export const Canvas: any = React.forwardRef<
 
       if (canvasEl) {
         canvasEl.removeEventListener('wheel', handleWheel);
+        canvasEl.removeEventListener('gesturestart', handleGestureStart);
+        canvasEl.removeEventListener('gesturechange', handleGestureChange);
+        canvasEl.removeEventListener('gestureend', handleGestureEnd);
       }
     };
   }, []);
