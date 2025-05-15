@@ -41,17 +41,7 @@ export default function MyApp({ children }: { children: React.ReactNode }) {
                 HOME
               </Link>
               <Divider orientation="vertical" />
-              <Link
-                href="/alldemos"
-                sx={{
-                  fontWeight: 'bold',
-                  color: 'primary.500',
-                  '&:hover': { color: 'primary.600' }
-                }}
-              >
-                ALL DEMOS
-              </Link>
-              <Divider orientation="vertical" />
+
               <Link
                 href="/text"
               // active={route === '/node'}

@@ -22,8 +22,11 @@ const IndexPage: NextPage = () => {
         left: 200,
         fileName: 'EOS Worldwide',
         fileSrc: 'https://www.eosworldwide.com/',
-        previewImage:
-          'https://files.boardx.us/beBT5B83vbXnsw7R5/ibQuarEwbKjEXL2pL/yBRJGAJKNN3TbKiW2/images/bigPic/5VSSmja6yynbsc3c.png',
+        previewImage: {
+          path: 'https://www.eosworldwide.com/wp-content/uploads/2023/01/eos-worldwide-logo.png',
+          tmpPath: 'https://files.boardx.us/beBT5B83vbXnsw7R5/ibQuarEwbKjEXL2pL/yBRJGAJKNN3TbKiW2/images/bigPic/5VSSmja6yynbsc3c.png',
+        },
+
         id: Math.random().toString(36).substr(2, 9),
       });
 
@@ -34,8 +37,11 @@ const IndexPage: NextPage = () => {
         left: 800,
         fileName: 'design thinking',
         fileSrc: 'https://www.boardx.us/dtdt-workshop-process/',
-        previewImage:
-          'https://www.boardx.us/content/images/size/w1000/2024/06/image-1.png',
+        previewImage: {
+          path: 'https://www.boardx.us/wp-content/uploads/2023/01/dtdt-workshop-process.png',
+          tmpPath: 'https://files.boardx.us/beBT5B83vbXnsw7R5/ibQuarEwbKjEXL2pL/yBRJGAJKNN3TbKiW2/images/bigPic/5VSSmja6yynbsc3c.png',
+        },
+
         id: Math.random().toString(36).substr(2, 9),
       });
 
@@ -46,6 +52,11 @@ const IndexPage: NextPage = () => {
         left: 500,
         fileName: 'no preview image',
         fileSrc: 'https://www.boardx.us',
+        previewImage: {
+          path: 'https://www.boardx.us/wp-content/uploads/2023/01/dtdt-workshop-process.png',
+          tmpPath: 'https://files.boardx.us/beBT5B83vbXnsw7R5/ibQuarEwbKjEXL2pL/yBRJGAJKNN3TbKiW2/images/bigPic/5VSSmja6yynbsc3c.png',
+        },
+
         id: Math.random().toString(36).substr(2, 9),
       });
 
