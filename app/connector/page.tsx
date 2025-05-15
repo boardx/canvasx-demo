@@ -1,9 +1,9 @@
 'use client';
-import type { XCanvas } from '@boardxus/canvasx';
+import type { XCanvas } from '@boardxus/canvasx-core';
 import type { NextPage } from 'next';
 import { useRef, useCallback } from 'react';
 import { Canvas } from '../../components/Canvas';
-import { XRectNotes, XConnector } from '@boardxus/canvasx';
+import { XRectNotes, XConnector } from '@boardxus/canvasx-core';
 import type { TMat2D } from 'fabric';
 import { Box } from '@mui/joy';
 

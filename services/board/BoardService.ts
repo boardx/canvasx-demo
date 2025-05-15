@@ -24,7 +24,7 @@ import UtilityService from '../UtilityService';
 //* Utils  */
 // import update from "../board/render";
 // import SyncService from "../SyncService";
-import { XCanvas } from '@boardxus/canvasx';
+import { XCanvas } from '@boardxus/canvasx-core';
 
 export default class BoardService {
   public canvas: XCanvas;

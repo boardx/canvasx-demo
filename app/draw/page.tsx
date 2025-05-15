@@ -1,5 +1,5 @@
 'use client';
-import { type XCanvas, XRectNotes } from '@boardxus/canvasx';
+import { type XCanvas, XRectNotes } from '@boardxus/canvasx-core';
 import { PencilBrush } from 'fabric'
 import { NextPage } from 'next';
 import { useRef, useCallback } from 'react';

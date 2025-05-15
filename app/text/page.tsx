@@ -1,5 +1,5 @@
 'use client';
-import { XCanvas, XTextbox } from '@boardxus/canvasx';
+import { XCanvas, XTextbox } from '@boardxus/canvasx-core';
 import { IText } from 'fabric';
 import { NextPage } from 'next';
 import { useRef, useCallback } from 'react';

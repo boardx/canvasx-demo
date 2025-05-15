@@ -1,11 +1,11 @@
 'use client';
-import type { XCanvas } from '@boardxus/canvasx';
+import type { XCanvas } from '@boardxus/canvasx-core';
 import { NextPage } from 'next';
 import { useRef, useCallback } from 'react';
 import { Canvas } from '../../components/Canvas';
 // import { Utils } from 'chart.js';
 import { ChartConfiguration } from 'chart.js';
-import { XChart } from '@boardxus/canvasx';
+import { XChart } from '@boardxus/canvasx-core';
 const barChartConfig: ChartConfiguration = {
   type: 'bar',
   data: {

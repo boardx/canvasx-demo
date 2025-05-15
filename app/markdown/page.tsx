@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import { useRef, useCallback } from 'react';
 import { Canvas } from '../../components/Canvas';
 
-import { XMarkdown, type XCanvas } from '@boardxus/canvasx';
+import { XMarkdown, type XCanvas } from '@boardxus/canvasx-core';
 
 const IndexPage: NextPage = () => {
   const ref = useRef<XCanvas>(null);

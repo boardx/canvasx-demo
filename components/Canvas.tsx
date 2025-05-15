@@ -1,4 +1,4 @@
-import { XCanvas } from '@boardxus/canvasx';
+import { XCanvas } from '@boardxus/canvasx-core';
 import { type TPointerEvent } from 'fabric';
 import React, { useEffect, useRef, useState } from 'react';
 import MiniCanvas from './preview/MiniCanvas';

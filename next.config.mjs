@@ -3,7 +3,7 @@
  */
 const nextConfig = {
   reactStrictMode: false,
-  transpilePackages: ['@boardxus/canvasx'],
+  transpilePackages: ['@boardxus/canvasx-core'],
 };
 
 export default nextConfig;

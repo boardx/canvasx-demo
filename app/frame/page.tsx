@@ -1,11 +1,11 @@
 'use client';
-import { type XCanvas} from '@boardxus/canvasx';
+import { type XCanvas} from '@boardxus/canvasx-core';
 import { Rect } from 'fabric'
 import { NextPage } from 'next';
 import { useRef, useCallback } from 'react';
 import { Canvas } from '../../components/Canvas';
 
-import { XFrame } from '@boardxus/canvasx';
+import { XFrame } from '@boardxus/canvasx-core';
 
 const IndexPage: NextPage = () => {
   const ref = useRef<XCanvas>(null);

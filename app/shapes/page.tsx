@@ -1,5 +1,5 @@
 'use client';
-import { type XCanvas, XShapeNotes } from '@boardxus/canvasx';
+import { type XCanvas, XShapeNotes } from '@boardxus/canvasx-core';
 import { NextPage } from 'next';
 import { useRef, useCallback } from 'react';
 import { Canvas } from '../../components/Canvas';

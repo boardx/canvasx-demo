@@ -1,5 +1,5 @@
 import { BaseAdapter } from './BaseAdapter';
-import { XImage } from '@boardxus/canvasx';
+import { XImage } from '@boardxus/canvasx-core';
 
 export class FileSystemAdapter extends BaseAdapter {
   canHandle(sourceType: string): boolean {

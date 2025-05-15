@@ -14,7 +14,7 @@ import { bindEvents } from './InitializeShortcut';
 //**rxjs */
 
 import BoardService from './board/BoardService';
-import type { XCanvas } from '@boardxus/canvasx';
+import type { XCanvas } from '@boardxus/canvasx-core';
 
 export default class EventService {
   public _eventHandlers: any;

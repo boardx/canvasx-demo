@@ -8,7 +8,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "@boardxus/canvasx": "^0.0.48",
+    "@boardxus/canvasx-core-core": "^0.1.1",
     "@mui/icons-material": "^5.15.19",
     "@mui/joy": "^5.0.0-beta.36",
     "@mui/material": "^5.15.19",

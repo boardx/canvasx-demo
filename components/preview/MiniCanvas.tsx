@@ -9,7 +9,7 @@ import Sheet from '@mui/joy/Sheet';
 
 import { Typography } from '@mui/joy';
 
-import { XCanvas } from '@boardxus/canvasx';
+import { XCanvas } from '@boardxus/canvasx-core';
 import { useSelector } from 'react-redux';
 import store, { RootState } from '../../redux/store';
 import {
