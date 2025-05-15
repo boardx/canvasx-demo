@@ -10,7 +10,7 @@ import {
   CardOverflow,
   AspectRatio,
   Divider,
-  Chip
+  Chip,
 } from '@mui/joy';
 import { useRouter } from 'next/navigation';
 import 'fabric';
@@ -57,18 +57,25 @@ const Homepage = () => {
             background: 'url("/logo_1.svg") no-repeat center center',
             opacity: 0.05,
             backgroundSize: '80%',
-            zIndex: 0
+            zIndex: 0,
           }}
         />
         <Box sx={{ position: 'relative', zIndex: 1 }}>
-          <Typography level="h1" fontSize={{ xs: '2.5rem', md: '3.5rem' }} fontWeight="bold" mb={2}>
+          <Typography
+            level="h1"
+            fontSize={{ xs: '2.5rem', md: '3.5rem' }}
+            fontWeight="bold"
+            mb={2}
+          >
             CanvasX
           </Typography>
-          <Typography level="title-lg" sx={{ maxWidth: '800px', mx: 'auto', mb: 4, opacity: 0.9 }}>
-            A powerful canvas-based UI component library for creating interactive diagrams,
-            flowcharts, and visual applications with ease.
+          <Typography
+            level="title-lg"
+            sx={{ maxWidth: '800px', mx: 'auto', mb: 4, opacity: 0.9 }}
+          >
+            A powerful canvas-based UI component library for creating
+            interactive diagrams, flowcharts, and visual applications with ease.
           </Typography>
-
         </Box>
       </Box>
 
@@ -80,7 +87,7 @@ const Homepage = () => {
           textAlign: 'center',
           fontWeight: 'bold',
           color: '#1e293b',
-          position: 'relative'
+          position: 'relative',
         }}
       >
         <Box
@@ -95,8 +102,8 @@ const Homepage = () => {
               width: '80%',
               height: '4px',
               background: 'linear-gradient(to right, #3a7bd5, #00d2ff)',
-              borderRadius: '2px'
-            }
+              borderRadius: '2px',
+            },
           }}
         >
           Component Categories
@@ -113,13 +120,15 @@ const Homepage = () => {
               transition: 'transform 0.2s, box-shadow 0.2s',
               '&:hover': {
                 boxShadow: 'md',
-                transform: 'translateY(-4px)'
-              }
+                transform: 'translateY(-4px)',
+              },
             }}
           >
             <CardContent sx={{ textAlign: 'center', p: 3 }}>
               <Box sx={{ mb: 2 }}>
-                <Typography level="title-lg" color="primary" fontWeight="bold">Basic Components</Typography>
+                <Typography level="title-lg" color="primary" fontWeight="bold">
+                  Basic Components
+                </Typography>
                 <Divider sx={{ my: 1.5 }} />
               </Box>
               <Grid container spacing={1.5}>
@@ -185,13 +194,15 @@ const Homepage = () => {
               transition: 'transform 0.2s, box-shadow 0.2s',
               '&:hover': {
                 boxShadow: 'md',
-                transform: 'translateY(-4px)'
-              }
+                transform: 'translateY(-4px)',
+              },
             }}
           >
             <CardContent sx={{ textAlign: 'center', p: 3 }}>
               <Box sx={{ mb: 2 }}>
-                <Typography level="title-lg" color="primary" fontWeight="bold">Advanced Features</Typography>
+                <Typography level="title-lg" color="primary" fontWeight="bold">
+                  Advanced Features
+                </Typography>
                 <Divider sx={{ my: 1.5 }} />
               </Box>
               <Grid container spacing={1.5}>
@@ -257,13 +268,15 @@ const Homepage = () => {
               transition: 'transform 0.2s, box-shadow 0.2s',
               '&:hover': {
                 boxShadow: 'md',
-                transform: 'translateY(-4px)'
-              }
+                transform: 'translateY(-4px)',
+              },
             }}
           >
             <CardContent sx={{ textAlign: 'center', p: 3 }}>
               <Box sx={{ mb: 2 }}>
-                <Typography level="title-lg" color="primary" fontWeight="bold">Documentation & Examples</Typography>
+                <Typography level="title-lg" color="primary" fontWeight="bold">
+                  Documentation & Examples
+                </Typography>
                 <Divider sx={{ my: 1.5 }} />
               </Box>
               <Grid container spacing={1.5}>
@@ -303,7 +316,7 @@ const Homepage = () => {
           textAlign: 'center',
           fontWeight: 'bold',
           color: '#1e293b',
-          position: 'relative'
+          position: 'relative',
         }}
       >
         <Box
@@ -318,8 +331,8 @@ const Homepage = () => {
               width: '80%',
               height: '4px',
               background: 'linear-gradient(to right, #3a7bd5, #00d2ff)',
-              borderRadius: '2px'
-            }
+              borderRadius: '2px',
+            },
           }}
         >
           Featured Demos
@@ -337,8 +350,8 @@ const Homepage = () => {
                 overflow: 'hidden',
                 '&:hover': {
                   boxShadow: 'md',
-                  transform: 'translateY(-4px)'
-                }
+                  transform: 'translateY(-4px)',
+                },
               }}
             >
               <CardOverflow>
@@ -351,7 +364,10 @@ const Homepage = () => {
                       justifyContent: 'center',
                     }}
                   >
-                    <Typography level="h3" sx={{ color: 'white', fontSize: '1.5rem' }}>
+                    <Typography
+                      level="h3"
+                      sx={{ color: 'white', fontSize: '1.5rem' }}
+                    >
                       {demo.icon} {demo.title}
                     </Typography>
                   </Box>
@@ -377,7 +393,9 @@ const Homepage = () => {
                 </Typography>
               </CardContent>
 
-              <CardOverflow sx={{ p: 1, borderTop: '1px solid', borderColor: 'divider' }}>
+              <CardOverflow
+                sx={{ p: 1, borderTop: '1px solid', borderColor: 'divider' }}
+              >
                 <Button
                   fullWidth
                   variant="solid"
@@ -400,7 +418,7 @@ const Homepage = () => {
           py: 4,
           textAlign: 'center',
           borderTop: '1px solid',
-          borderColor: 'divider'
+          borderColor: 'divider',
         }}
       >
         <Typography level="body-sm" sx={{ mb: 1, color: 'text.secondary' }}>
@@ -419,39 +437,42 @@ const featuredDemos = [
   {
     title: 'Interactive Flowchart',
     icon: '📊',
-    description: 'Create complex flowcharts with interactive connectors and shapes, perfect for diagramming processes and workflows.',
+    description:
+      'Create complex flowcharts with interactive connectors and shapes, perfect for diagramming processes and workflows.',
     tags: [
       { label: 'Connectors', color: 'primary' },
       { label: 'Shapes', color: 'success' },
-      { label: 'Interactive', color: 'neutral' }
+      { label: 'Interactive', color: 'neutral' },
     ],
     path: '/alldemos',
-    gradient: 'linear-gradient(to right, #3a7bd5, #00d2ff)'
+    gradient: 'linear-gradient(to right, #3a7bd5, #00d2ff)',
   },
   {
     title: 'Note Board',
     icon: '📝',
-    description: 'Organize ideas and information with draggable, resizable sticky notes in various colors and shapes.',
+    description:
+      'Organize ideas and information with draggable, resizable sticky notes in various colors and shapes.',
     tags: [
       { label: 'Notes', color: 'warning' },
       { label: 'Draggable', color: 'success' },
-      { label: 'Colorful', color: 'danger' }
+      { label: 'Colorful', color: 'danger' },
     ],
     path: '/notes',
-    gradient: 'linear-gradient(to right, #FF8008, #FFC837)'
+    gradient: 'linear-gradient(to right, #FF8008, #FFC837)',
   },
   {
     title: 'Shape Gallery',
     icon: '🔷',
-    description: 'Explore various shapes and paths with customizable properties, perfect for creating visual elements.',
+    description:
+      'Explore various shapes and paths with customizable properties, perfect for creating visual elements.',
     tags: [
       { label: 'Shapes', color: 'primary' },
       { label: 'Paths', color: 'success' },
-      { label: 'Customizable', color: 'neutral' }
+      { label: 'Customizable', color: 'neutral' },
     ],
     path: '/shapes',
-    gradient: 'linear-gradient(to right, #1D976C, #93F9B9)'
-  }
+    gradient: 'linear-gradient(to right, #1D976C, #93F9B9)',
+  },
 ];
 
 export default Homepage;

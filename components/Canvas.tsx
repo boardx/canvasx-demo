@@ -2,11 +2,7 @@ import { XCanvas } from '@boardxus/canvasx-core';
 import { type TPointerEvent } from 'fabric';
 import React, { useEffect, useRef, useState } from 'react';
 
-
-
 const DEV_MODE = process.env.NODE_ENV === 'development';
-
-
 
 export const Canvas: any = React.forwardRef<
   XCanvas,
@@ -27,10 +23,8 @@ export const Canvas: any = React.forwardRef<
     });
     canvasInstance.setTargetFindTolerance(5);
 
-
     setCanvas(canvasInstance); // Update the type of the setCanvas argument
     // EventService.getInstance().listenCanvasDomEvents();
-
 
     // const alignmentGuidelines = new alignmentGuideLines(canvasInstance);
     // alignmentGuidelines.initializeEvents();
@@ -54,7 +48,6 @@ export const Canvas: any = React.forwardRef<
     } else if (typeof ref === 'object' && ref) {
       ref.current = canvasInstance;
     }
-
 
     canvasInstance.on('object:modified', (e) => {
       setCoords();
@@ -94,9 +87,6 @@ export const Canvas: any = React.forwardRef<
   return (
     <>
       <canvas tabIndex={0} ref={canvasRef} />
-
-
-
     </>
   );
 });

@@ -1,7 +1,7 @@
 //@ts-nocheck
 'use client';
 import { type XCanvas, XRectNotes } from '@boardxus/canvasx-core';
-import { PencilBrush } from 'fabric'
+import { PencilBrush } from 'fabric';
 import { NextPage } from 'next';
 import { useRef, useCallback } from 'react';
 import { Canvas } from '../../components/Canvas';

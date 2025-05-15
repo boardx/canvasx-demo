@@ -6,8 +6,6 @@ import Head from 'next/head';
 import { Container, Navbar } from 'react-bootstrap';
 import { Divider, Link, Sheet } from '@mui/joy';
 
-
-
 export default function MyApp({ children }: { children: React.ReactNode }) {
   return (
     <html>
@@ -22,7 +20,6 @@ export default function MyApp({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <body>
-
         <Navbar bg="light">
           <Container>
             <Navbar.Brand>CanvasX Demo</Navbar.Brand>
@@ -36,7 +33,7 @@ export default function MyApp({ children }: { children: React.ReactNode }) {
             >
               <Link
                 href="/"
-              // active={router === '/'}
+                // active={router === '/'}
               >
                 HOME
               </Link>
@@ -44,7 +41,7 @@ export default function MyApp({ children }: { children: React.ReactNode }) {
 
               <Link
                 href="/text"
-              // active={route === '/node'}
+                // active={route === '/node'}
               >
                 TEXT
               </Link>
@@ -61,7 +58,7 @@ export default function MyApp({ children }: { children: React.ReactNode }) {
                 href="/connector-demo"
                 sx={{
                   color: 'primary.500',
-                  '&:hover': { color: 'primary.600' }
+                  '&:hover': { color: 'primary.600' },
                 }}
               >
                 CONNECTOR DEMO
@@ -71,7 +68,7 @@ export default function MyApp({ children }: { children: React.ReactNode }) {
                 href="/connector-docs"
                 sx={{
                   color: 'success.500',
-                  '&:hover': { color: 'success.600' }
+                  '&:hover': { color: 'success.600' },
                 }}
               >
                 CONNECTOR DOCS
@@ -100,7 +97,6 @@ export default function MyApp({ children }: { children: React.ReactNode }) {
           </Container>
         </Navbar>
         {children}
-
       </body>
     </html>
   );

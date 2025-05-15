@@ -260,9 +260,9 @@ const IndexPage: NextPage = () => {
           //@ts-ignore
           textMessage.push(
             '- matrix:' +
-            getViewportTransformRoundNumber(
-              canvas?.getActiveObject()?.calcTransformMatrix(),
-            ),
+              getViewportTransformRoundNumber(
+                canvas?.getActiveObject()?.calcTransformMatrix(),
+              ),
           );
           const pointer = canvas.getPointer(event.e);
           //@ts-ignore
@@ -292,9 +292,7 @@ const IndexPage: NextPage = () => {
       });
 
       //create a function to get viewportTransform and all numbers are rounded to 2 decimal places
-      function getViewportTransformRoundNumber(
-        transform: TMat2D | null,
-      ) {
+      function getViewportTransformRoundNumber(transform: TMat2D | null) {
         return transform?.map((value) => value.toFixed(2)).join(', ');
       }
       // // Create 10 CircleNotes
