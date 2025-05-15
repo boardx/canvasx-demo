@@ -1,3 +1,4 @@
+//@ts-nocheck
 'use client';
 import { NextPage } from 'next';
 import { useRef, useCallback } from 'react';

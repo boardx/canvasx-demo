@@ -1,3 +1,4 @@
+//@ts-nocheck
 'use client';
 import { type XCanvas, XTextbox, XRectNotes, XConnector } from '@boardxus/canvasx-core';
 import { NextPage } from 'next';

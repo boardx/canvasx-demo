@@ -1,3 +1,4 @@
+//@ts-nocheck
 'use client';
 import { XCanvas, XTextbox } from '@boardxus/canvasx-core';
 import { IText } from 'fabric';

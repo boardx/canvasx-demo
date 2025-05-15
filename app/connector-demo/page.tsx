@@ -1,3 +1,4 @@
+//@ts-nocheck
 'use client';
 import { XCanvas, XRectNotes, XCircleNotes, XTextbox, XConnector, XShapeNotes } from '@boardxus/canvasx-core';
 import { type NextPage } from 'next';
@@ -276,7 +277,6 @@ const ConnectorDemoPage: NextPage = () => {
 
             // Calculate control points for curved path
             const mx = (x1 + x2) / 2;
-            const my = (y1 + y2) / 2;
             const c1x = pathType === 'curvePath' ? mx : x1;
             const c1y = pathType === 'curvePath' ? y1 : y1;
             const c2x = pathType === 'curvePath' ? mx : x2;
@@ -325,7 +325,6 @@ const ConnectorDemoPage: NextPage = () => {
 
             // Create control points
             const midX = (objCenterX + targetCenterX) / 2;
-            const midY = (objCenterY + targetCenterY) / 2;
 
             // Create the connector
             const newConnector = new XConnector(

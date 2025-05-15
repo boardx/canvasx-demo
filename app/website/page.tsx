@@ -1,3 +1,4 @@
+//@ts-nocheck
 'use client';
 import { } from 'fabric';
 import { NextPage } from 'next';

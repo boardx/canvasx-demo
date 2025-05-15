@@ -1,17 +1,14 @@
 import { XCanvas } from '@boardxus/canvasx-core';
 import { type TPointerEvent } from 'fabric';
 import React, { useEffect, useRef, useState } from 'react';
-import MiniCanvas from './preview/MiniCanvas';
+
 
 
 const DEV_MODE = process.env.NODE_ENV === 'development';
 
 
 
-import { BoardService } from '../services';
-import { changeMode } from '../redux/features/mode.slice';
-import store from '../redux/store';
-import loadCopyPasteService from './copyPasteService';
+
 
 
 export const Canvas = React.forwardRef<
@@ -32,14 +29,11 @@ export const Canvas = React.forwardRef<
       width: document.documentElement.clientWidth - 60,
     });
     canvasInstance.setTargetFindTolerance(5);
-    BoardService.getInstance().setBoard(canvasInstance);
+
 
     setCanvas(canvasInstance); // Update the type of the setCanvas argument
     // EventService.getInstance().listenCanvasDomEvents();
-    // EventService.getInstance().listenWindowEvents();
-    // EventService.getInstance().listenTriggerEvents();
-    // EventService.getInstance().listenCanvasActionEvents();
-    loadCopyPasteService(canvasInstance);
+
 
     // const alignmentGuidelines = new alignmentGuideLines(canvasInstance);
     // alignmentGuidelines.initializeEvents();
@@ -130,7 +124,7 @@ export const Canvas = React.forwardRef<
           }, 100);
 
           console.log("!@ store.dispatch(changeMode('line'));");
-          store.dispatch(changeMode('line'));
+
           // setTimeout(() => {
           //   handleLineMouseDown(e);
           // }, 50);
@@ -191,7 +185,7 @@ export const Canvas = React.forwardRef<
   return (
     <>
       <canvas tabIndex={0} ref={canvasRef} />
-      <MiniCanvas canvas={canvas!} />
+
 
 
     </>

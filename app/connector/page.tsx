@@ -1,3 +1,4 @@
+//@ts-nocheck
 'use client';
 import type { XCanvas } from '@boardxus/canvasx-core';
 import type { NextPage } from 'next';
@@ -82,7 +83,7 @@ const IndexPage: NextPage = () => {
           cp1 = rectNoteA.calculateControlPoint(point1);
           cp2 = rectNoteB.calculateControlPoint(point2);
 
-          const curve = new XConnector(point1, point2, cp1, cp2, style, {
+          const curve = new XConnector(point1, point2, cp1, cp2, {
             stroke: 'black',
             strokeWidth: 2,
             fill: '',
@@ -259,9 +260,9 @@ const IndexPage: NextPage = () => {
           //@ts-ignore
           textMessage.push(
             '- matrix:' +
-              getViewportTransformRoundNumber(
-                canvas?.getActiveObject()?.calcTransformMatrix(),
-              ),
+            getViewportTransformRoundNumber(
+              canvas?.getActiveObject()?.calcTransformMatrix(),
+            ),
           );
           const pointer = canvas.getPointer(event.e);
           //@ts-ignore

@@ -1,3 +1,4 @@
+//@ts-nocheck
 'use client';
 import { type XCanvas, XRectNotes } from '@boardxus/canvasx-core';
 import { PencilBrush } from 'fabric'

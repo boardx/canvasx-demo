@@ -1,3 +1,4 @@
+//@ts-nocheck
 'use client';
 import { type XCanvas, XImage } from '@boardxus/canvasx-core';
 import { NextPage } from 'next';

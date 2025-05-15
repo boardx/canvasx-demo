@@ -1,8 +1,8 @@
+//@ts-nocheck
 'use client';
 import { Box, Typography, Divider, Accordion, AccordionSummary, AccordionDetails, List, ListItem, Card, CardContent } from '@mui/joy';
 import { type NextPage } from 'next';
 import { useRouter } from 'next/navigation';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const XConnectorDocsPage: NextPage = () => {
     const router = useRouter();

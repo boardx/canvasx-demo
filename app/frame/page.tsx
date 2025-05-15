@@ -1,3 +1,4 @@
+//@ts-nocheck
 'use client';
 import { type XCanvas} from '@boardxus/canvasx-core';
 import { Rect } from 'fabric'

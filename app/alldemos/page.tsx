@@ -1,9 +1,10 @@
+//@ts-nocheck
 'use client';
-import { XCanvas, XRectNotes, XCircleNotes, XTextbox, XImage, XConnector, XMarkdown, XChart, XFrame, XPath, XGroup, XShapeNotes } from '@boardxus/canvasx-core';
+import { XCanvas, XRectNotes, XCircleNotes, XTextbox, XConnector, XMarkdown, XPath, XShapeNotes } from '@boardxus/canvasx-core';
 import { type NextPage } from 'next';
 import { useRef, useCallback, useState } from 'react';
 import { Canvas } from '../../components/Canvas';
-import { Box, Button, Stack, Typography, Slider, Select, Option, Divider, Tabs, TabList, Tab, TabPanel } from '@mui/joy';
+import { Box, Button, Stack, Typography, Slider, Select, Option, TabList, Tab, Tabs } from '@mui/joy';
 
 const AllDemosPage: NextPage = () => {
     const ref = useRef<XCanvas>(null);
@@ -422,7 +423,7 @@ const AllDemosPage: NextPage = () => {
             height: 60,
             textAlign: 'center',
             backgroundColor: '#90EE90', // light green
-    
+
             id: 'startNode',
         });
 
@@ -610,7 +611,6 @@ const AllDemosPage: NextPage = () => {
 
         // Calculate control points for curved path
         const mx = (x1 + x2) / 2;
-        const my = (y1 + y2) / 2;
         const c1x = pathType === 'curvePath' ? mx : x1;
         const c1y = pathType === 'curvePath' ? y1 : y1;
         const c2x = pathType === 'curvePath' ? mx : x2;

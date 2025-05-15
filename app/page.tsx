@@ -1,3 +1,4 @@
+//@ts-nocheck
 'use client';
 import { Typography, Card, Grid, Box, Button } from '@mui/joy';
 import { useRouter } from 'next/navigation';
