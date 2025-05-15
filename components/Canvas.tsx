@@ -1,8 +1,9 @@
-import { XCanvas } from '@boardxus/canvasx-core';
+import { XCanvas, Point } from '@boardxus/canvasx-core';
 import React, { useEffect, useRef, useState } from 'react';
 import { initAligningGuidelines } from "./aligning-guidelines/index";
 
 const DEV_MODE = process.env.NODE_ENV === 'development';
+
 
 export const Canvas: any = React.forwardRef<
   XCanvas,
@@ -23,19 +24,14 @@ export const Canvas: any = React.forwardRef<
     });
     canvasInstance.setTargetFindTolerance(5);
 
-    setCanvas(canvasInstance); // Update the type of the setCanvas argument
-    // EventService.getInstance().listenCanvasDomEvents();
+    setCanvas(canvasInstance);
     initAligningGuidelines(canvasInstance);
-    // const alignmentGuidelines = new alignmentGuideLines(canvasInstance);
-    // alignmentGuidelines.initializeEvents();
-    // initializeCanvasEvents(canvasInstance);
+
     const handleResize = () => {
       canvasInstance.setHeight(document.documentElement.clientHeight - 60);
       canvasInstance.setWidth(document.documentElement.clientWidth);
       canvasInstance.renderAll();
     };
-
-    const lastTimeRefireMouseDown = Date.now();
 
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(document.documentElement);
@@ -49,29 +45,33 @@ export const Canvas: any = React.forwardRef<
       ref.current = canvasInstance;
     }
 
-    canvasInstance.on('object:modified', (e) => {
-      setCoords();
-    });
-
-    //loop through all objects and setCoords()
-    function setCoords() {
-      canvasInstance.getObjects().forEach(function (obj) {
-        obj.setCoords();
-      });
-    }
+    // --- Pinch and Pan Event Fixes ---
+    // Remove all touch event logic, only support mouse/trackpad
 
     // Enable zoom in/out for trackpad and mouse wheel
     const handleWheel = (e: WheelEvent) => {
-      // Only zoom if Ctrl, Meta, or Alt is pressed (for trackpad/mouse zoom)
-      if (e.ctrlKey || e.metaKey || e.altKey) {
-        e.preventDefault();
-        const delta = e.deltaY || e.detail;
-        let zoom = canvasInstance.getZoom();
-        zoom *= 0.999 ** delta;
-        zoom = Math.max(0.1, Math.min(zoom, 10));
-        const pointer = canvasInstance.getPointer(e);
-        canvasInstance.zoomToPoint(pointer, zoom);
+      // Trackpad pan: two-finger scroll without modifier keys
+      if (!(e.ctrlKey || e.metaKey || e.altKey)) {
+        // Only pan if deltaX or deltaY is present
+        if (Math.abs(e.deltaX) > 0 || Math.abs(e.deltaY) > 0) {
+          e.preventDefault();
+          // Use deltaX and deltaY directly for panning
+          // Optionally, adjust sensitivity if needed
+          const panSensitivity = 1.2;
+          canvasInstance.relativePan(new Point(-e.deltaX * panSensitivity, -e.deltaY * panSensitivity));
+        }
+        return;
       }
+      // Only zoom if Ctrl, Meta, or Alt is pressed (for trackpad/mouse zoom)
+      e.preventDefault();
+      const delta = e.deltaY || e.detail;
+      const sensitivity = 2.5;
+      let zoom = canvasInstance.getZoom();
+      zoom *= Math.pow(0.999, delta * sensitivity);
+      zoom = Math.max(0.1, Math.min(zoom, 10));
+      const pointer = canvasInstance.getPointer(e);
+      const transformPointer = pointer.transform(canvasInstance.viewportTransform);
+      canvasInstance.zoomToPoint(transformPointer, zoom);
     };
 
     // --- Trackpad pinch-to-zoom support for MacBook (gesture events) ---
@@ -98,7 +98,7 @@ export const Canvas: any = React.forwardRef<
       lastGestureScale = 1;
     };
 
-    const canvasEl = canvasRef.current;
+    const canvasEl = canvasInstance.wrapperEl;
     if (canvasEl) {
       canvasEl.addEventListener('wheel', handleWheel, { passive: false });
       canvasEl.addEventListener('gesturestart', handleGestureStart, { passive: false });
@@ -122,10 +122,6 @@ export const Canvas: any = React.forwardRef<
         ref.current = null;
       }
 
-      // `dispose` is async
-      // however it runs a sync DOM cleanup
-      // its async part ensures rendering has completed
-      // and should not affect react
       canvasInstance.dispose();
 
       if (canvasEl) {
