@@ -1,5 +1,6 @@
 import { XCanvas } from '@boardxus/canvasx-core';
 import React, { useEffect, useRef, useState } from 'react';
+import { initAligningGuidelines } from "./aligning-guidelines/index";
 
 const DEV_MODE = process.env.NODE_ENV === 'development';
 
@@ -24,7 +25,7 @@ export const Canvas: any = React.forwardRef<
 
     setCanvas(canvasInstance); // Update the type of the setCanvas argument
     // EventService.getInstance().listenCanvasDomEvents();
-
+    initAligningGuidelines(canvasInstance);
     // const alignmentGuidelines = new alignmentGuideLines(canvasInstance);
     // alignmentGuidelines.initializeEvents();
     // initializeCanvasEvents(canvasInstance);

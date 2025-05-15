@@ -55,6 +55,35 @@ const IndexPage: NextPage = () => {
         const left = 200 + column * (fileWidth + fileMargin);
         const top = 200 + row * (fileHeight + fileMargin);
 
+        // Determine fileType for XFile
+        let fileType = 'XFile';
+        switch (file) {
+          case FileEnum.DOC:
+          case FileEnum.DOCX:
+            fileType = 'XFileWord';
+            break;
+          case FileEnum.XLS:
+          case FileEnum.XLSX:
+            fileType = 'XFileExcel';
+            break;
+          case FileEnum.PPT:
+          case FileEnum.PPTX:
+            fileType = 'XFilePPT';
+            break;
+          case FileEnum.PDF:
+            fileType = 'XFilePDF';
+            break;
+          case FileEnum.ZIP:
+            fileType = 'XFileZip';
+            break;
+          case FileEnum.MP4:
+          case FileEnum.WEBM:
+            fileType = 'XFileVideo';
+            break;
+          default:
+            fileType = 'XFile';
+        }
+
         const newFile = new XFile({
           left: left,
           top: top,
@@ -68,6 +97,7 @@ const IndexPage: NextPage = () => {
           cornerColor: 'blue',
           fileName: `file${index}.${file}`,
           fileSrc: `https://www.example.com/${file}.pdf`,
+          objType: fileType, // <-- set the WidgetFileType
           id: Math.random().toString(36).substring(7),
         });
 

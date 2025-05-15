@@ -64,31 +64,6 @@ export default function MyApp({ children }: { children: React.ReactNode }) {
                   </ListItemButton>
                 </ListItem>
 
-                <ListItem nested>
-                  <ListItemButton
-                    component={Link}
-                    href="/connector-demo"
-                    sx={{
-                      color: 'primary.500',
-                      '&:hover': { color: 'primary.600' },
-                    }}
-                  >
-                    CONNECTOR DEMO
-                  </ListItemButton>
-                </ListItem>
-
-                <ListItem nested>
-                  <ListItemButton
-                    component={Link}
-                    href="/connector-docs"
-                    sx={{
-                      color: 'success.500',
-                      '&:hover': { color: 'success.600' },
-                    }}
-                  >
-                    CONNECTOR DOCS
-                  </ListItemButton>
-                </ListItem>
 
                 <ListItem nested>
                   <ListItemButton component={Link} href="/align">
@@ -138,11 +113,6 @@ export default function MyApp({ children }: { children: React.ReactNode }) {
                   </ListItemButton>
                 </ListItem>
 
-                <ListItem nested>
-                  <ListItemButton component={Link} href="/frame">
-                    FRAME
-                  </ListItemButton>
-                </ListItem>
               </List>
             </Box>
           </aside>

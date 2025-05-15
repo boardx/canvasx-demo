@@ -1,16 +1,37 @@
 //@ts-nocheck
 'use client';
-import type { XCanvas } from '@boardxus/canvasx-core';
-import type { NextPage } from 'next';
-import { useRef, useCallback } from 'react';
+import {
+  XCanvas,
+  XRectNotes,
+  XCircleNotes,
+  XTextbox,
+  XConnector,
+  XShapeNotes,
+} from '@boardxus/canvasx-core';
+import { type NextPage } from 'next';
+import { useRef, useCallback, useState, useEffect } from 'react';
 import { Canvas } from '../../components/Canvas';
-import { XRectNotes, XConnector } from '@boardxus/canvasx-core';
-import type { TMat2D } from 'fabric';
-import { Box } from '@mui/joy';
+import {
+  Box,
+  Button,
+  Stack,
+  Typography,
+  Select,
+  Option,
+  Slider,
+  Radio,
+  RadioGroup,
+} from '@mui/joy';
 
-const IndexPage: NextPage = () => {
+const ConnectorPage: NextPage = () => {
   const ref = useRef<XCanvas>(null);
-  // const [mouseInfo, setMouseInfo] = useState<string[]>([]);
+  const [pathType, setPathType] = useState<'curvePath' | 'straightPath'>('curvePath');
+  const [arrowTip, setArrowTip] = useState<'none' | 'start' | 'end' | 'both'>('both');
+  const [strokeWidth, setStrokeWidth] = useState(3);
+  const [strokeColor, setStrokeColor] = useState('#4682B4');
+  const [selectedConnector, setSelectedConnector] = useState<string | null>(null);
+  const [objectToConnect, setObjectToConnect] = useState<string | null>(null);
+  const [connectMode, setConnectMode] = useState('manual'); // manual, automatic
 
   const onLoad = useCallback(
     (canvas: XCanvas) => {
@@ -91,21 +112,24 @@ const IndexPage: NextPage = () => {
             hasBorders: false,
             hasControls: true,
             selectable: true,
-            fromId: null,
-            toId: null,
+            fromId: rectNoteA.id,
+            toId: rectNoteB.id,
+            fromObjectId: rectNoteA.id, // maintain fromObjectId
+            toObjectId: rectNoteB.id,   // maintain toObjectId
             perPixelTargetFind: true,
             id: Math.random().toString(36).substr(2, 9),
           });
 
           canvas.add(curve);
 
-          //add connecter id to rectNote's field connectors as an object, {connectorId: string, point: {x: number, y: number}} the point shouldb be t he local point to the rectNote.
+          //add connecter id to rectNote's field connectors as an object, {connectorId: string, point: {x: number, y: number}, connectorType: 'from' | 'to'}
           rectNoteA.connectors.push({
             connectorId: curve.id,
             point: {
               x: point1.x - rectNoteA.left,
               y: point1.y - rectNoteA.top,
             },
+            connectorType: 'from',
           });
           rectNoteB.connectors.push({
             connectorId: curve.id,
@@ -113,10 +137,13 @@ const IndexPage: NextPage = () => {
               x: point2.x - rectNoteB.left,
               y: point2.y - rectNoteB.top,
             },
+            connectorType: 'to',
           });
           //add rectNote's id to the connector's field connectedRectNotes as an array of string
           curve.fromId = rectNoteA.id;
           curve.toId = rectNoteB.id;
+          curve.fromObjectId = rectNoteA.id; // ensure fromObjectId is set
+          curve.toObjectId = rectNoteB.id;   // ensure toObjectId is set
         }
       }
 
@@ -344,4 +371,4 @@ const IndexPage: NextPage = () => {
   );
 };
 
-export default IndexPage;
+export default ConnectorPage;

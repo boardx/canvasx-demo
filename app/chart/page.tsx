@@ -36,6 +36,8 @@ const barChartConfig: ChartConfiguration = {
     ],
   },
   options: {
+    maintainAspectRatio: false,
+    responsive: false,
     scales: {
       y: {
         beginAtZero: true,
@@ -343,6 +345,18 @@ const bubbleChartConfig: ChartConfiguration = {
 
 const IndexPage: NextPage = () => {
   const ref = useRef<XCanvas>(null);
+  // Store chart refs for update access
+  const chartRefs = useRef<Record<string, XChart>>({});
+
+  // Handler to update chart config after edit
+  const onChartEdit = useCallback((chartKey: string, newConfig: ChartConfiguration) => {
+    const canvas = ref.current;
+    const chart = chartRefs.current[chartKey];
+    if (canvas && chart) {
+      chart.updateChart(newConfig);
+      canvas.renderAll();
+    }
+  }, []);
 
   const onLoad = useCallback(
     (canvas: XCanvas) => {
@@ -351,41 +365,24 @@ const IndexPage: NextPage = () => {
         height: document.documentElement.clientHeight - 60,
       });
 
-      const barChart = new XChart({
-        chartConfig: barChartConfig,
-        width: 400,
-        height: 400,
-      });
-      const lineChart = new XChart({
-        chartConfig: lineChartConfig,
-        width: 400,
-        height: 400,
-      });
-      const pieChart = new XChart({
-        chartConfig: pieChartConfig,
-        width: 400,
-        height: 400,
-      });
-      const doughnutChart = new XChart({
-        chartConfig: doughnutChartConfig,
-        width: 400,
-        height: 400,
-      });
-      const radarChart = new XChart({
-        chartConfig: radarChartConfig,
-        width: 400,
-        height: 400,
-      });
-      const polarAreaChart = new XChart({
-        chartConfig: polarAreaChartConfig,
-        width: 400,
-        height: 400,
-      });
-      const bubbleChart = new XChart({
-        chartConfig: bubbleChartConfig,
-        width: 400,
-        height: 400,
-      });
+      // Create charts and store refs
+      const barChart = new XChart({ chartConfig: barChartConfig, width: 400, height: 400 });
+      const lineChart = new XChart({ chartConfig: lineChartConfig, width: 400, height: 400 });
+      const pieChart = new XChart({ chartConfig: pieChartConfig, width: 400, height: 400 });
+      const doughnutChart = new XChart({ chartConfig: doughnutChartConfig, width: 400, height: 400 });
+      const radarChart = new XChart({ chartConfig: radarChartConfig, width: 400, height: 400 });
+      const polarAreaChart = new XChart({ chartConfig: polarAreaChartConfig, width: 400, height: 400 });
+      const bubbleChart = new XChart({ chartConfig: bubbleChartConfig, width: 400, height: 400 });
+
+      chartRefs.current = {
+        bar: barChart,
+        line: lineChart,
+        pie: pieChart,
+        doughnut: doughnutChart,
+        radar: radarChart,
+        polar: polarAreaChart,
+        bubble: bubbleChart,
+      };
 
       canvas.add(barChart);
       canvas.add(lineChart);
@@ -405,13 +402,6 @@ const IndexPage: NextPage = () => {
       bubbleChart.set({ left: 950, top: 50 });
 
       canvas.renderAll();
-
-      // // Example of updating the chart
-      // setTimeout(() => {
-      //     const newConfig = { ...chartConfig };
-      //     newConfig.data.datasets[0].data = [5, 10, 15, 20, 25, 30];
-      //     chartObject.updateChart(newConfig);
-      // }, 3000);
     },
     [ref],
   );
@@ -421,7 +411,7 @@ const IndexPage: NextPage = () => {
       <div style={{ width: '100%', height: '80vh', margin: '0 auto', border: '1px solid #eee', borderRadius: 12, overflow: 'hidden', background: '#fafbfc' }}>
         <Canvas ref={ref} onLoad={onLoad} />
       </div>
-
+      {/* Example usage: onChartEdit('bar', newBarConfig) after edit/save */}
       {/* Description Section */}
       <div style={{ marginTop: 48, marginBottom: 16, padding: 16, maxWidth: 900, marginLeft: 'auto', marginRight: 'auto' }}>
         <h2>Chart Demo Description</h2>

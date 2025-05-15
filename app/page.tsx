@@ -285,10 +285,10 @@ const Homepage = () => {
                     fullWidth
                     variant="soft"
                     color="primary"
-                    onClick={() => router.push('/connector-docs')}
+                    onClick={() => router.push('/connector')}
                     sx={{ justifyContent: 'center', py: 1.5, mb: 1 }}
                   >
-                    XConnector Documentation
+                    XConnector
                   </Button>
                 </Grid>
                 <Grid xs={12}>
@@ -296,7 +296,7 @@ const Homepage = () => {
                     fullWidth
                     variant="soft"
                     color="success"
-                    onClick={() => router.push('/connector-demo')}
+                    onClick={() => router.push('/connector')}
                     sx={{ justifyContent: 'center', py: 1.5 }}
                   >
                     Interactive Connector Demo
