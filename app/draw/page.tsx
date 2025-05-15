@@ -52,8 +52,100 @@ const IndexPage: NextPage = () => {
   );
 
   return (
-    <div className="position-relative">
-      <Canvas ref={ref} onLoad={onLoad} />
+    <div className="position-relative" style={{ minHeight: '80vh' }}>
+      <div
+        style={{
+          width: '100%',
+          height: '75vh',
+          margin: '0 auto',
+          border: '1px solid #eee',
+          borderRadius: 12,
+          overflow: 'hidden',
+          background: '#fafbfc',
+        }}
+      >
+        <Canvas ref={ref} onLoad={onLoad} />
+      </div>
+
+      {/* Description Section */}
+      <div
+        style={{
+          marginTop: 48,
+          marginBottom: 16,
+          padding: 16,
+          maxWidth: 900,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
+        <h2>Drawing Demo Description</h2>
+        <p>
+          This page demonstrates the free drawing mode in <b>CanvasX</b> using the{' '}
+          <b>PencilBrush</b> from Fabric.js. You can draw directly on the canvas
+          with a custom pen cursor. A sample note is also added for reference.
+        </p>
+      </div>
+
+      {/* Documentation Section */}
+      <div
+        style={{
+          marginBottom: 48,
+          padding: 16,
+          maxWidth: 900,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
+        <h2>Drawing Mode Documentation</h2>
+        <h3>Overview</h3>
+        <p>
+          CanvasX supports free drawing using Fabric.js brushes. The{' '}
+          <b>PencilBrush</b> allows users to draw smooth, hand-drawn lines on the
+          canvas. You can customize the brush width, color, and cursor.
+        </p>
+        <h3>Key Properties</h3>
+        <ul>
+          <li>
+            <b>isDrawingMode</b>: boolean — Enables or disables drawing mode on
+            the canvas.
+          </li>
+          <li>
+            <b>freeDrawingBrush</b>: Brush — The brush used for drawing (e.g.,
+            PencilBrush, CircleBrush).
+          </li>
+          <li>
+            <b>freeDrawingBrush.width</b>: number — The width of the drawing
+            brush.
+          </li>
+          <li>
+            <b>freeDrawingBrush.color</b>: string — The color of the drawing
+            brush.
+          </li>
+        </ul>
+        <h3>Usage Example</h3>
+        <pre
+          style={{
+            background: '#f6f8fa',
+            padding: 12,
+            borderRadius: 6,
+          }}
+        >
+          {`canvas.freeDrawingBrush = new PencilBrush(canvas);
+canvas.isDrawingMode = true;
+canvas.freeDrawingBrush.width = 3;
+canvas.freeDrawingBrush.color = 'purple';`}
+        </pre>
+        <h3>Tips & Best Practices</h3>
+        <ul>
+          <li>Use a custom cursor for better drawing experience.</li>
+          <li>
+            Combine drawing with shapes and notes for richer diagrams.
+          </li>
+          <li>
+            Disable drawing mode when not needed to allow object selection.
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };

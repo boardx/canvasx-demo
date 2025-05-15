@@ -463,9 +463,20 @@ const ConnectorDemoPage: NextPage = () => {
   };
 
   return (
-    <div className="position-relative">
-      <Canvas ref={ref} onLoad={onLoad} />
-
+    <div className="position-relative" style={{ minHeight: '80vh' }}>
+      <div
+        style={{
+          width: '100%',
+          height: '75vh',
+          margin: '0 auto',
+          border: '1px solid #eee',
+          borderRadius: 12,
+          overflow: 'hidden',
+          background: '#fafbfc',
+        }}
+      >
+        <Canvas ref={ref} onLoad={onLoad} />
+      </div>
       <Box
         sx={{
           position: 'absolute',
@@ -482,7 +493,6 @@ const ConnectorDemoPage: NextPage = () => {
         <Typography level="h4" mb={2}>
           XConnector Controls
         </Typography>
-
         {selectedConnector ? (
           <Typography level="body-md" color="primary" mb={2}>
             Editing connector: {selectedConnector}
@@ -492,7 +502,6 @@ const ConnectorDemoPage: NextPage = () => {
             Create a new connector or select an existing one
           </Typography>
         )}
-
         <Stack spacing={2}>
           <Typography level="body-sm">Connection Mode:</Typography>
           <RadioGroup
@@ -503,7 +512,6 @@ const ConnectorDemoPage: NextPage = () => {
             <Radio value="manual" label="Manual" />
             <Radio value="automatic" label="Automatic" />
           </RadioGroup>
-
           <Typography level="body-sm">Path Type:</Typography>
           <Select
             value={pathType}
@@ -514,7 +522,6 @@ const ConnectorDemoPage: NextPage = () => {
             <Option value="curvePath">Curved Path</Option>
             <Option value="straightPath">Straight Path</Option>
           </Select>
-
           <Typography level="body-sm">Arrow Tips:</Typography>
           <Select
             value={arrowTip}
@@ -527,7 +534,6 @@ const ConnectorDemoPage: NextPage = () => {
             <Option value="end">End</Option>
             <Option value="both">Both</Option>
           </Select>
-
           <Typography level="body-sm">Stroke Width: {strokeWidth}</Typography>
           <Slider
             min={1}
@@ -535,7 +541,6 @@ const ConnectorDemoPage: NextPage = () => {
             value={strokeWidth}
             onChange={(_, value) => setStrokeWidth(value as number)}
           />
-
           <Typography level="body-sm">Stroke Color:</Typography>
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
             {[
@@ -564,7 +569,6 @@ const ConnectorDemoPage: NextPage = () => {
               />
             ))}
           </Box>
-
           <Button
             variant="solid"
             color="primary"
@@ -573,7 +577,6 @@ const ConnectorDemoPage: NextPage = () => {
           >
             Create Connector
           </Button>
-
           {selectedConnector && (
             <Button
               variant="soft"
@@ -585,7 +588,6 @@ const ConnectorDemoPage: NextPage = () => {
           )}
         </Stack>
       </Box>
-
       <Box
         sx={{
           position: 'fixed',
@@ -606,6 +608,36 @@ const ConnectorDemoPage: NextPage = () => {
             : objectToConnect
               ? `Selected object: ${objectToConnect}. Use automatic mode to create connectors from this object.`
               : 'Select a connector to edit its properties or select a shape to create new connections.'}
+        </Typography>
+      </Box>
+
+      {/* Description Section */}
+      <Box sx={{ mt: 6, mb: 2, px: 2, maxWidth: 900, mx: 'auto' }}>
+        <Typography level="h5" mb={1}>
+          Demo Description
+        </Typography>
+        <Typography level="body-md">
+          This demo showcases the <b>XConnector</b> component from <b>@boardxus/canvasx-core</b>. You can create, edit, and delete connectors between various shapes on the canvas. Use the control panel to adjust connector properties such as path type, arrow tips, stroke width, and color. In automatic mode, select a shape and quickly create connectors to other shapes.
+        </Typography>
+      </Box>
+
+      {/* Documentation Section */}
+      <Box sx={{ mb: 6, px: 2, maxWidth: 900, mx: 'auto' }}>
+        <Typography level="h5" mb={1}>
+          Documentation
+        </Typography>
+        <Typography level="body-md" mb={1}>
+          <b>Usage Instructions:</b>
+        </Typography>
+        <Box component="ul" sx={{ ml: 3 }}>
+          <li>Select a connector to edit its properties in the control panel.</li>
+          <li>Use <b>Manual</b> mode to create connectors between random points.</li>
+          <li>Use <b>Automatic</b> mode: select a shape, then create a connector to another random shape.</li>
+          <li>Drag connector endpoints to attach them to shapes.</li>
+          <li>Delete a selected connector using the delete button.</li>
+        </Box>
+        <Typography level="body-md" mt={2}>
+          <b>API Reference:</b> See <code>XConnector</code>, <code>XRectNotes</code>, <code>XCircleNotes</code>, <code>XShapeNotes</code>, and <code>XTextbox</code> in <code>@boardxus/canvasx-core</code> for more details.
         </Typography>
       </Box>
     </div>

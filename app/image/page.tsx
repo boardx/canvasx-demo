@@ -92,8 +92,78 @@ const IndexPage: NextPage = () => {
   );
 
   return (
-    <div className="position-relative">
-      <Canvas ref={ref} onLoad={onLoad} />
+    <div className="position-relative" style={{ minHeight: '80vh' }}>
+      <div
+        style={{
+          width: '100%',
+          height: '75vh',
+          margin: '0 auto',
+          border: '1px solid #eee',
+          borderRadius: 12,
+          overflow: 'hidden',
+          background: '#fafbfc',
+        }}
+      >
+        <Canvas ref={ref} onLoad={onLoad} />
+      </div>
+
+      {/* Description Section */}
+      <div
+        style={{
+          marginTop: 48,
+          marginBottom: 16,
+          padding: 16,
+          maxWidth: 900,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
+        <h2>Image Demo Description</h2>
+        <p>
+          This page demonstrates the <b>XImage</b> component from <b>@boardxus/canvasx-core</b>. It shows how to add and display images on the canvas, set their source, and control their size and position.
+        </p>
+      </div>
+
+      {/* Documentation Section */}
+      <div
+        style={{
+          marginBottom: 48,
+          padding: 16,
+          maxWidth: 900,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
+        <h2>XImage Documentation</h2>
+        <h3>Overview</h3>
+        <p>
+          The <b>XImage</b> widget allows you to add images to your CanvasX board. Images can be loaded from URLs, positioned, resized, and combined with other objects for rich visual layouts.
+        </p>
+        <h3>Key Properties</h3>
+        <ul>
+          <li><b>src</b>: string — The image source URL.</li>
+          <li><b>width</b>, <b>height</b>: number — The dimensions of the image.</li>
+          <li><b>top</b>, <b>left</b>: number — The position of the image on the canvas.</li>
+          <li><b>id</b>: string — Unique identifier for the image.</li>
+        </ul>
+        <h3>Usage Example</h3>
+        <pre style={{ background: '#f6f8fa', padding: 12, borderRadius: 6 }}>
+          {`const image = new XImage('elementId', {
+  top: 100,
+  left: 100,
+  width: 200,
+  height: 200,
+});
+await image.setSrc('https://example.com/image.png');
+canvas.add(image);`}
+        </pre>
+        <h3>Tips & Best Practices</h3>
+        <ul>
+          <li>Use high-resolution images for better clarity on high-DPI screens.</li>
+          <li>Combine images with notes, shapes, and connectors for diagrams and presentations.</li>
+          <li>Set unique IDs for each image to manage them programmatically.</li>
+        </ul>
+      </div>
     </div>
   );
 };

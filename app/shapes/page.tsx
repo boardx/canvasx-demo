@@ -194,8 +194,54 @@ const IndexPage: NextPage = () => {
   );
 
   return (
-    <div className="position-relative">
-      <Canvas ref={ref} onLoad={onLoad} />
+    <div className="position-relative" style={{ minHeight: '80vh' }}>
+      {/* Demo Section at the Top */}
+      <div style={{ width: '100%', height: '80vh', margin: '0 auto', border: '1px solid #eee', borderRadius: 12, overflow: 'hidden', background: '#fafbfc' }}>
+        <Canvas ref={ref} onLoad={onLoad} />
+      </div>
+
+      {/* Description Section */}
+      <div style={{ marginTop: 48, marginBottom: 16, padding: 16, maxWidth: 900, marginLeft: 'auto', marginRight: 'auto' }}>
+        <h2>Shapes Demo Description</h2>
+        <p>
+          This page demonstrates the <b>XShapeNotes</b> component from <b>@boardxus/canvasx-core</b>. It displays a variety of shape types, including rectangles, diamonds, circles, hexagons, triangles, stars, and more. Each shape is rendered on the canvas and can be used as a building block for diagrams and visualizations.
+        </p>
+      </div>
+
+      {/* Documentation Section */}
+      <div style={{ marginBottom: 48, padding: 16, maxWidth: 900, marginLeft: 'auto', marginRight: 'auto' }}>
+        <h2>XShapeNotes Documentation</h2>
+        <h3>Overview</h3>
+        <p>
+          The <b>XShapeNotes</b> widget allows you to add a wide range of geometric shapes to your CanvasX board. Each shape can be customized in size, color, and label, and supports drag, resize, and other interactions.
+        </p>
+        <h3>Properties</h3>
+        <ul>
+          <li><b>shapeName</b>: string — The name of the shape (e.g., 'rect', 'diamond', 'circle', 'hexagon', etc.).</li>
+          <li><b>width</b>, <b>height</b>: number — The dimensions of the shape.</li>
+          <li><b>backgroundColor</b>: string — The fill color of the shape.</li>
+          <li><b>id</b>: string — Unique identifier for the shape.</li>
+          <li><b>textAlign</b>: string — Alignment of the label text inside the shape.</li>
+        </ul>
+        <h3>Usage Example</h3>
+        <pre style={{ background: '#f6f8fa', padding: 12, borderRadius: 6 }}>
+          {`const shape = new XShapeNotes('My Shape', {
+  shapeName: 'star',
+  width: 200,
+  height: 200,
+  backgroundColor: 'lightblue',
+  id: 'star1',
+  textAlign: 'center',
+});
+canvas.add(shape);`}
+        </pre>
+        <h3>Tips & Best Practices</h3>
+        <ul>
+          <li>Use <b>shapeName</b> to select from a variety of built-in shapes.</li>
+          <li>Combine shapes with connectors to build flowcharts and diagrams.</li>
+          <li>Customize <b>backgroundColor</b> and <b>textAlign</b> for better visual distinction.</li>
+        </ul>
+      </div>
     </div>
   );
 };

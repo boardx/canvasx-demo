@@ -214,8 +214,52 @@ const IndexPage: NextPage = () => {
   );
 
   return (
-    <div className="position-relative">
-      <Canvas ref={ref} onLoad={onLoad} />
+    <div className="position-relative" style={{ minHeight: '80vh' }}>
+      <div style={{ width: '100%', height: '80vh', margin: '0 auto', border: '1px solid #eee', borderRadius: 12, overflow: 'hidden', background: '#fafbfc' }}>
+        <Canvas ref={ref} onLoad={onLoad} />
+      </div>
+
+      {/* Description Section */}
+      <div style={{ marginTop: 48, marginBottom: 16, padding: 16, maxWidth: 900, marginLeft: 'auto', marginRight: 'auto' }}>
+        <h2>File Demo Description</h2>
+        <p>
+          This page demonstrates file embedding and preview in CanvasX. You can use file widgets to upload, display, and interact with various file types (PDF, images, docs, etc.) directly on your canvas.
+        </p>
+      </div>
+
+      {/* Documentation Section */}
+      <div style={{ marginBottom: 48, padding: 16, maxWidth: 900, marginLeft: 'auto', marginRight: 'auto' }}>
+        <h2>File Widget Documentation</h2>
+        <h3>Overview</h3>
+        <p>
+          CanvasX supports embedding and previewing files as objects on the canvas. This is useful for sharing documents, images, and other files in a collaborative workspace.
+        </p>
+        <h3>Key Properties</h3>
+        <ul>
+          <li><b>src</b>: string — The file URL or data source.</li>
+          <li><b>type</b>: string — The file type (e.g., 'pdf', 'image', 'doc').</li>
+          <li><b>width</b>, <b>height</b>: number — The dimensions of the file preview.</li>
+          <li><b>top</b>, <b>left</b>: number — The position of the file on the canvas.</li>
+        </ul>
+        <h3>Usage Example</h3>
+        <pre style={{ background: '#f6f8fa', padding: 12, borderRadius: 6 }}>
+          {`const file = new XFile({
+  src: 'https://example.com/file.pdf',
+  type: 'pdf',
+  top: 100,
+  left: 100,
+  width: 400,
+  height: 300,
+});
+canvas.add(file);`}
+        </pre>
+        <h3>Tips & Best Practices</h3>
+        <ul>
+          <li>Use file widgets to share and preview documents in collaborative sessions.</li>
+          <li>Combine files with notes and diagrams for richer context.</li>
+          <li>Resize and position file previews for optimal viewing.</li>
+        </ul>
+      </div>
     </div>
   );
 };

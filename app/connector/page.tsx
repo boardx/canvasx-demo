@@ -260,9 +260,9 @@ const IndexPage: NextPage = () => {
           //@ts-ignore
           textMessage.push(
             '- matrix:' +
-              getViewportTransformRoundNumber(
-                canvas?.getActiveObject()?.calcTransformMatrix(),
-              ),
+            getViewportTransformRoundNumber(
+              canvas?.getActiveObject()?.calcTransformMatrix(),
+            ),
           );
           const pointer = canvas.getPointer(event.e);
           //@ts-ignore
@@ -329,8 +329,10 @@ const IndexPage: NextPage = () => {
   );
 
   return (
-    <Box className="position-relative">
-      <Canvas ref={ref} onLoad={onLoad} />
+    <div className="position-relative" style={{ minHeight: '80vh' }}>
+      <div style={{ width: '100%', height: '80vh', margin: '0 auto', border: '1px solid #eee', borderRadius: 12, overflow: 'hidden', background: '#fafbfc' }}>
+        <Canvas ref={ref} onLoad={onLoad} />
+      </div>
       {/* <Typography level='body-md' style={{ backgroundColor: 'white', position: 'absolute', width: 500, right: 10, top: 10 }}>
                 {mouseInfo.map((info) => (
                     <Box key={info}>
@@ -338,7 +340,7 @@ const IndexPage: NextPage = () => {
                     </Box>
                 ))}
             </Typography> */}
-    </Box>
+    </div>
   );
 };
 

@@ -105,67 +105,169 @@ const CropDemoPage: NextPage = () => {
   };
 
   return (
-    <div className="position-relative">
-      <Canvas ref={ref} onLoad={onLoad} />
-
-      <Box
-        sx={{
-          position: 'absolute',
-          top: '100px',
-          right: '20px',
-          backgroundColor: 'white',
-          padding: 3,
-          borderRadius: 2,
-          boxShadow: 'var(--joy-shadow-md)',
-          width: '250px',
-          zIndex: 10,
+    <div className="position-relative" style={{ minHeight: '80vh' }}>
+      <h1 style={{ textAlign: 'center', marginTop: 20 }}>
+        Image Crop Demo
+      </h1>
+      <div
+        style={{
+          width: '100%',
+          height: '70vh',
+          margin: '0 auto',
+          border: '1px solid #eee',
+          borderRadius: 12,
+          overflow: 'hidden',
+          background: '#fafbfc',
+          position: 'relative',
         }}
       >
-        <Typography level="h4" mb={2}>
-          Image Crop Tools
-        </Typography>
-        <Divider sx={{ my: 2 }} />
+        <Canvas ref={ref} onLoad={onLoad} />
 
-        <Stack spacing={2}>
-          {!isCropping ? (
-            <>
-              <Button
-                variant="solid"
-                color="primary"
-                onClick={startCrop}
-                disabled={!currentImage}
-              >
-                Start Cropping
-              </Button>
-              <Button
-                variant="outlined"
-                color="neutral"
-                onClick={resetImage}
-                disabled={!currentImage}
-              >
-                Reset to Original
-              </Button>
-            </>
-          ) : (
-            <ButtonGroup variant="solid" sx={{ width: '100%' }}>
-              <Button color="success" onClick={applyCrop} sx={{ flex: 1 }}>
-                Apply Crop
-              </Button>
-              <Button color="danger" onClick={cancelCrop} sx={{ flex: 1 }}>
-                Cancel
-              </Button>
-            </ButtonGroup>
-          )}
-        </Stack>
+        {/* Crop Tools Panel (kept as is) */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '100px',
+            right: '20px',
+            backgroundColor: 'white',
+            padding: 3,
+            borderRadius: 2,
+            boxShadow: 'var(--joy-shadow-md)',
+            width: '250px',
+            zIndex: 10,
+          }}
+        >
+          <Typography level="h4" mb={2}>
+            Image Crop Tools
+          </Typography>
+          <Divider sx={{ my: 2 }} />
 
-        <Divider sx={{ my: 2 }} />
-        <Typography level="body-sm">
-          {isCropping
-            ? 'Drag and resize the selection rectangle to crop the image. Click Apply when ready.'
-            : 'Click Start Cropping to begin. You can drag and resize the selection area.'}
-        </Typography>
-      </Box>
+          <Stack spacing={2}>
+            {!isCropping ? (
+              <>
+                <Button
+                  variant="solid"
+                  color="primary"
+                  onClick={startCrop}
+                  disabled={!currentImage}
+                >
+                  Start Cropping
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="neutral"
+                  onClick={resetImage}
+                  disabled={!currentImage}
+                >
+                  Reset to Original
+                </Button>
+              </>
+            ) : (
+              <ButtonGroup variant="solid" sx={{ width: '100%' }}>
+                <Button color="success" onClick={applyCrop} sx={{ flex: 1 }}>
+                  Apply Crop
+                </Button>
+                <Button color="danger" onClick={cancelCrop} sx={{ flex: 1 }}>
+                  Cancel
+                </Button>
+              </ButtonGroup>
+            )}
+          </Stack>
 
+          <Divider sx={{ my: 2 }} />
+          <Typography level="body-sm">
+            {isCropping
+              ? 'Drag and resize the selection rectangle to crop the image. Click Apply when ready.'
+              : 'Click Start Cropping to begin. You can drag and resize the selection area.'}
+          </Typography>
+        </Box>
+      </div>
+
+      {/* Description Section */}
+      <div
+        style={{
+          marginTop: 48,
+          marginBottom: 16,
+          padding: 16,
+          maxWidth: 900,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
+        <h2>Image Crop Demo Description</h2>
+        <p>
+          This page demonstrates the <b>XImageCropper</b> widget from
+          <b>@boardxus/canvasx-core</b>. You can crop images interactively on
+          the canvas, apply or cancel the crop, and reset to the original image.
+          The demo loads a sample image and provides a control panel for cropping
+          actions.
+        </p>
+      </div>
+
+      {/* Documentation Section */}
+      <div
+        style={{
+          marginBottom: 48,
+          padding: 16,
+          maxWidth: 900,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
+        <h2>XImageCropper Documentation</h2>
+        <h3>Overview</h3>
+        <p>
+          The <b>XImageCropper</b> widget enables interactive cropping of images
+          on the CanvasX board. Users can drag and resize a selection rectangle,
+          apply the crop, or reset the image to its original state.
+        </p>
+        <h3>Key Methods</h3>
+        <ul>
+          <li>
+            <b>startCropping(canvas)</b>: Begin cropping mode for the image.
+          </li>
+          <li>
+            <b>applyCrop(canvas)</b>: Apply the crop and update the image.
+          </li>
+          <li>
+            <b>cancelCrop(canvas)</b>: Cancel the cropping operation and
+            restore the previous state.
+          </li>
+          <li>
+            <b>resetToOriginal(canvas)</b>: Reset the image to its original,
+            uncropped state.
+          </li>
+        </ul>
+        <h3>Usage Example</h3>
+        <pre
+          style={{
+            background: '#f6f8fa',
+            padding: 12,
+            borderRadius: 6,
+          }}
+        >
+          {`const image = new XImageCropper(imgElement, { ...options });
+canvas.add(image);
+image.startCropping(canvas);
+// After user adjusts crop area:
+await image.applyCrop(canvas);`}
+        </pre>
+        <h3>Tips & Best Practices</h3>
+        <ul>
+          <li>
+            Always call <b>startCropping</b> before allowing the user to crop.
+          </li>
+          <li>
+            Use <b>resetToOriginal</b> to let users revert changes.
+          </li>
+          <li>
+            Combine cropping with other image editing features for a richer
+            experience.
+          </li>
+        </ul>
+      </div>
+
+      {/* Demo Instructions (kept as is) */}
       <Box
         sx={{
           position: 'fixed',

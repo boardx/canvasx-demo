@@ -208,9 +208,9 @@ const IndexPage: NextPage = () => {
           //@ts-ignore
           textMessage.push(
             '- matrix:' +
-              getViewportTransformRoundNumber(
-                canvas?.getActiveObject()?.calcTransformMatrix(),
-              ),
+            getViewportTransformRoundNumber(
+              canvas?.getActiveObject()?.calcTransformMatrix(),
+            ),
           );
           const pointer = canvas.getPointer(event.e);
           //@ts-ignore
@@ -277,25 +277,82 @@ const IndexPage: NextPage = () => {
   );
 
   return (
-    <Box className="position-relative">
-      <Canvas ref={ref} onLoad={onLoad} />
-      <Typography
-        level="body-md"
+    <div className="position-relative" style={{ minHeight: '80vh' }}>
+      <div style={{ width: '100%', height: '80vh', margin: '0 auto', border: '1px solid #eee', borderRadius: 12, overflow: 'hidden', background: '#fafbfc' }}>
+        <Canvas ref={ref} onLoad={onLoad} />
+      </div>
+
+      {/* Description Section */}
+      <div
         style={{
-          backgroundColor: 'white',
-          position: 'absolute',
-          width: 500,
-          right: 10,
-          top: 10,
+          marginTop: 48,
+          marginBottom: 16,
+          padding: 16,
+          maxWidth: 900,
+          marginLeft: 'auto',
+          marginRight: 'auto',
         }}
       >
-        {mouseInfo.map((info) => (
-          <Box key={Math.random()}>
-            <p>{info}</p>
-          </Box>
-        ))}
-      </Typography>
-    </Box>
+        <h2>Viewport Demo Description</h2>
+        <p>
+          This page demonstrates viewport and zoom controls in CanvasX. You can use
+          viewport widgets to manage the visible area, zoom in/out, and navigate
+          large boards efficiently.
+        </p>
+      </div>
+
+      {/* Documentation Section */}
+      <div
+        style={{
+          marginBottom: 48,
+          padding: 16,
+          maxWidth: 900,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
+        <h2>Viewport Widget Documentation</h2>
+        <h3>Overview</h3>
+        <p>
+          CanvasX provides viewport and zoom management features, allowing users
+          to focus on specific areas, fit content to view, and navigate large
+          diagrams or boards.
+        </p>
+        <h3>Key Properties</h3>
+        <ul>
+          <li>
+            <b>zoom</b>: number — The current zoom level of the canvas.
+          </li>
+          <li>
+            <b>viewportTransform</b>: array — The transformation matrix for the
+            viewport.
+          </li>
+        </ul>
+        <h3>Usage Example</h3>
+        <pre
+          style={{
+            background: '#f6f8fa',
+            padding: 12,
+            borderRadius: 6,
+          }}
+        >{`canvas.setZoom(1.5);
+canvas.zoomToPoint({ x: 200, y: 200 }, 2);
+canvas.zoomToViewAllObjects();`}</pre>
+        <h3>Tips & Best Practices</h3>
+        <ul>
+          <li>
+            Use zoom controls to focus on details or get an overview of the board.
+          </li>
+          <li>
+            Combine viewport management with navigation widgets for large
+            diagrams.
+          </li>
+          <li>
+            Reset zoom to fit all objects for presentations or exports.
+          </li>
+        </ul>
+      </div>
+    </div>
   );
 };
 

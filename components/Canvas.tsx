@@ -60,6 +60,31 @@ export const Canvas: any = React.forwardRef<
       });
     }
 
+    // Enable zoom in/out for trackpad and mouse wheel
+    const handleWheel = (e: WheelEvent) => {
+      if (!e.ctrlKey && !e.metaKey && !e.altKey) {
+        // Only zoom if not panning (no modifier keys)
+        e.preventDefault();
+        // Use only deltaY for modern browsers
+        const delta = e.deltaY || e.detail;
+        let zoom = canvasInstance.getZoom();
+        // Trackpad is usually small delta, mouse wheel is larger
+        if (e.deltaMode === 1) {
+          // Firefox line mode
+          zoom *= 0.999 ** delta;
+        } else {
+          zoom *= 0.999 ** delta;
+        }
+        zoom = Math.max(0.1, Math.min(zoom, 10));
+        const pointer = canvasInstance.getPointer(e);
+        canvasInstance.zoomToPoint(pointer, zoom);
+      }
+    };
+    const canvasEl = canvasRef.current;
+    if (canvasEl) {
+      canvasEl.addEventListener('wheel', handleWheel, { passive: false });
+    }
+
     // it is crucial `onLoad` is a dependency of this effect
     // to ensure the canvas is disposed and re-created if it changes
     onLoad?.(canvasInstance);
@@ -81,6 +106,10 @@ export const Canvas: any = React.forwardRef<
       // its async part ensures rendering has completed
       // and should not affect react
       canvasInstance.dispose();
+
+      if (canvasEl) {
+        canvasEl.removeEventListener('wheel', handleWheel);
+      }
     };
   }, []);
 
